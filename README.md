@@ -127,7 +127,7 @@ cd {this repo}/yolov7-pose/build/
 
 # About License
 
-For the 3rd-party module and Deepstream, you need to follow their license
+For the 3rd-party module and TensorRT, you need to follow their license
 
 For the part I wrote, you can do anything you want
 
