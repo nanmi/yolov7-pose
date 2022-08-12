@@ -1,9 +1,9 @@
 <!--
 
- * @Description: YOLOv5 TensorRT
+ * @Description: YOLOv7 Pose TensorRT
  * @Author: nanmi
- * @Date: 2021-11-22 16:55:35
- * @LastEditTime: 2021-11-22 16:55:35
+ * @Date: 2022-08-03 16:55:35
+ * @LastEditTime: 2022-08-12 09:36:35
  * @LastEditors: nanmi
  * @GitHub:github.com/nanmi
    -->
@@ -22,7 +22,7 @@ TensorRT 8+
 OpenCV 4.0+ (build with opencv-contrib module) [how to build](https://gist.github.com/nanmi/c5cc1753ed98d7e3482031fc379a3f3d#%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91gpu%E7%89%88opencv)
 
 # Export onnx model
-It is not possible to use the official script directly.Need to shield reshap and permute operators like this:
+Need to shield reshap and permute operators like this:
 ```python
     def forward(self, x):
         # x = x.copy()  # for profiling
