@@ -22,7 +22,7 @@ TensorRT 8+
 OpenCV 4.0+ (build with opencv-contrib module) [how to build](https://gist.github.com/nanmi/c5cc1753ed98d7e3482031fc379a3f3d#%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91gpu%E7%89%88opencv)
 
 # Export onnx model
-Need to shield reshap and permute operators like this:
+Need to shield reshap and permute operators like this in the keypoint-related code `class IKeypoint(nn.Module)`
 ```python
     def forward(self, x):
         # x = x.copy()  # for profiling
