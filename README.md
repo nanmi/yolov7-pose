@@ -21,7 +21,30 @@ TensorRT 8+
 
 OpenCV 4.0+ (build with opencv-contrib module) [how to build](https://gist.github.com/nanmi/c5cc1753ed98d7e3482031fc379a3f3d#%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91gpu%E7%89%88opencv)
 
-# Export onnx model
+# Updated Guide
+Clone the yolov7 (pose)
+`git clone -b pose https://github.com/WongKinYiu/yolov7.git`
+
+Clone this repository yolov7-pose
+`git clone https://github.com/nanmi/yolov7-pose.git`
+
+preferably use a docker container for conversion, such as `nvcr.io/nvidia/pytorch:22.04-py3`
+
+Follow **step 1** given below, when you have `yolov7-w6-pose.onnx` generated
+
+Simplify the ONNX model using `onnxsim`
+
+```shell
+# Install onnxsim
+pip3 install onnxsim
+
+# Simplify Model
+onnxsim yolov7-w6-pose.onnx yolov7-w6-pose-sim.onnx
+```
+
+Follow **further steps** with the simplified model
+
+# 1. Export onnx model
 Need to shield reshap and permute operators like this in the keypoint-related code `class IKeypoint(nn.Module)`
 ```python
     def forward(self, x):
@@ -87,7 +110,7 @@ use `YoloLayer_TRT_v7.0/script/add_custom_yolo_op.py` to add a new op lookes lik
 ![](assets/2.jpg) 
 
 
-# Build yolo layer tensorrt plugin
+# 2. Build yolo layer tensorrt plugin
 
 ```shell
 cd {this repo}/YoloLayer_TRT_v7.0
@@ -97,7 +120,7 @@ cmake .. && make
 
 generate `libyolo.so` when build successfully.
 
-# Build TensorRT engine
+# 3. Build TensorRT engine
 
 ```shell
 cd {this repo}/
@@ -110,7 +133,7 @@ wait a long time :satisfied:
 TensorRT engine is generated successfully.
 
 
-# Inference
+# 4. Inference
 
 ```shell
 cd {this repo}/yolov7-pose/
@@ -119,7 +142,7 @@ cmake .. && make
 
 # Inference test
 cd {this repo}/yolov7-pose/build/
-./yolov7_pose -d {your build engine} ../person.jpg
+./yolov7_pose {your build engine} -i ../person.jpg
 ```
 
 # Result
