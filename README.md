@@ -119,7 +119,7 @@ cmake .. && make
 
 # Inference test
 cd {this repo}/yolov7-pose/build/
-./yolov7_pose -d {your build engine} ../person.jpg
+./yolov7_pose {your build engine} -i ../person.jpg
 ```
 
 # Result
