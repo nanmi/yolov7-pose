@@ -233,9 +233,9 @@ namespace nvinfer1
 
             // W: (Pw * e^tw) / FeaturemapW * netwidth
             // v5: https://github.com/ultralytics/yolov5/issues/471
-            det->bbox[2] = 2.0f * Logist(curInput[idx + k * info_len_i * total_grid + 2 * total_grid]);
+            det->bbox[2] = 2.0f * Logist(curInput[idx + k * (info_len_i + info_len_kpt) * total_grid + 2 * total_grid]);
             det->bbox[2] = det->bbox[2] * det->bbox[2] * anchors[2 * k];
-            det->bbox[3] = 2.0f * Logist(curInput[idx + k * info_len_i * total_grid + 3 * total_grid]);
+            det->bbox[3] = 2.0f * Logist(curInput[idx + k * (info_len_i + info_len_kpt) * total_grid + 3 * total_grid]);
             det->bbox[3] = det->bbox[3] * det->bbox[3] * anchors[2 * k + 1];
             det->conf = box_prob * max_cls_prob;
             det->class_id = class_id;
